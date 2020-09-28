@@ -174,7 +174,7 @@ function addLoginBar()
 function initializeBar()
 {
     addBarStyle()
-    if(window.location.pathname.includes('login/index.php'))
+    if(window.location.pathname.includes('/login/'))
         addLoginBar()
     else
         addDashboardBar()
