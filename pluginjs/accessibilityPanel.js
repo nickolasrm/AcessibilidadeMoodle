@@ -7,68 +7,69 @@ function setFontZoomCookie(value){Cookies.set('fontZoom', value)}
 
 function getFontZoomCookie(){ return parseFloat(Cookies.get('fontZoom')) }
 
+function parseBoolToInt(val) { return val ? 1 : 0 }
+
 function parseBool(val) { return val == 'true' }
 
 function setHighContrastCookie(value) { Cookies.set('isHighContrast', value) }
 
 function isHighContrastCookie() { return parseBool(Cookies.get('isHighContrast'))}
 
+function setGrayscaleCookie(value) { Cookies.set('isGrayscale', value) }
+
+function isGrayscaleCookie() { return parseBool(Cookies.get('isGrayscale'))}
 
 
 
 function resetFonts()
 {
-    cookie = getFontZoomCookie()
-    if(cookie != 0)
-    {
-        $('body').find('*').each(function(){
-            fsize = parseFloat($(this).css('font-size')) - cookie
-            $(this).css('font-size',fsize)
-        })
-        Cookies.set('fontZoom', 0)
-    }
+    setFontZoomCookie(1)
+    zoomFonts(0)
 }
 
-function zoomFonts(factor, addToCookie=true)
+function zoomFonts(addToFactor)
 {
-    const lLimit = -5.0
-    const hLimit = 10.0
+    const lLimit = 0.7
+    const hLimit = 1.3
 
-    if(addToCookie)
-        addToFontZoomCookie(factor)
+    addToFontZoomCookie(addToFactor)
     let zCookie = getFontZoomCookie()
 
-    if(zCookie >= lLimit && 
-        zCookie <= hLimit)
-    {
-        $('body').find('*').each(function(){
-            fsize = parseFloat($(this).css('font-size')) + factor
-            $(this).css('font-size',fsize)
-        })
-    }
-    else
-    {
-        if(zCookie < lLimit)
-            setFontZoomCookie(lLimit)
-        else if(zCookie > hLimit)
-            setFontZoomCookie(hLimit)
-    }
+    if(zCookie < lLimit)
+        setFontZoomCookie(lLimit)
+    else if(zCookie > hLimit)
+        setFontZoomCookie(hLimit)
+
+    $('html').css('zoom', zCookie)
 }
+
+
+
+
 
 function applyHighContrast()
 {
     setHighContrastCookie(true)
     $('<style id="styleHighContrast">').text(
         `
-            .highContrastBlackBackground
+            /*Geral e chat*/
+            .highContrastBlackBackground, .yui-layout-bd, .chat-message, 
+            .card-body, .list-group-item, card-footer, .bg-white, .message,
+            .dropdown-menu, .popover-header, .popover-body
             {
                 background-color: black !important;
             }
-            .highContrastWhiteText
+            .progress-bar
+            {
+                background: yellow !important;
+            }
+            .highContrastWhiteText, .text, .time, .event, .text-truncate,
+            .dropdown-item, .popover-body
             {
                 color: white !important;
             }
-            .highContrastYellowText
+            .highContrastYellowText, .chat-message-meta, a[target="_blank"], 
+             .calendar-controls a
             {
                 color: yellow !important;
             }
@@ -77,10 +78,30 @@ function applyHighContrast()
                 color: white !important;
                 font-style: italic !important;
             }
-            .highContrastBorder
+            .highContrastBorder, .message, .dropdown-menu
             {
                 border: 1px solid white !important;
             }
+
+            /*Vlibras*/
+            .vw-text
+            {
+                color: white;
+            }
+            .vw-text:hover
+            {
+                color: yellow;
+            }
+            .vw-text-active
+            {
+                font-weight: 700;
+            }
+            div[vw] #gameContainer canvas
+            {
+                background: #E8E8E8;
+            }
+        </style>
+        
         `).appendTo('head');
 }
 
@@ -90,18 +111,6 @@ function removeHighContrast()
     setHighContrastCookie(false)
     $('#styleHighContrast').remove()
 }
-
-/*
-function enableHighContrastIcon()
-{
-    $('#accessibilityHighContrastBtn').text("visibility")
-}
-
-function disableHighContrastIcon()
-{
-    $('#accessibilityHighContrastBtn').text("visibility_off")
-}
-*/
 
 function toggleHighContrast()
 {
@@ -120,83 +129,167 @@ function toggleHighContrast()
 
 
 
-function addBarStyle()
+function applyGrayscale(factor)
 {
-    $('<style>').text(`
-        #accessibilityBar
-        {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        #accessibilityBar a
-        {
-            padding-right: 2vmin;
-        }
+    $('html').css('filter', `grayscale(${factor})`)
+}
+
+function toggleGrayscale()
+{
+    setGrayscaleCookie(!isGrayscaleCookie())
+    applyGrayscale(parseBoolToInt(isGrayscaleCookie()))
+}
+
+
+
+function initializeMenuTag()
+{
+    $(`
+        <div id="accessibilityDiv">
+            <div id="accessibilityMenu">
+                <span><strong>Acessibilidade</strong></span>
+                <ul>
+                    <li id="accessibilityHighContrastBtn" 
+                        class="accessibilityMenuLi">
+                        <span class="accessibilityMenuLiIcons">brightness_medium</span>
+                        <span>Alto contraste</span></li>
+                    <li id="accessibilityGrayscaleBtn" 
+                        class="accessibilityMenuLi">
+                        <span class="accessibilityMenuLiIcons">filter_b_and_w</span>
+                        <span>Escala de cinza</span></li>
+                    <li id="accessibilityIncreaseFontBtn"
+                        class="accessibilityMenuLi">
+                        <span class="accessibilityMenuLiIcons">zoom_in</span>
+                        <span>Ampliar</span></li>
+                    <li id="accessibilityResetFontBtn"
+                        class="accessibilityMenuLi">
+                        <span class="accessibilityMenuLiIcons">youtube_searched_for</span>
+                    <span>Redefinir</span></li>
+                    <li id="accessibilityDecreaseFontBtn"
+                        class="accessibilityMenuLi">
+                        <span class="accessibilityMenuLiIcons">zoom_out</span>
+                        <span>Reduzir</span></li>
+                </ul>
+            </div>
+            <div id="accessibilityToggleMenuBtn">accessibility</div>
+        </div>
+    `).appendTo('html')
+}
+
+function initializeMenuStyle()
+{
+    $(`
+        <style>
+            #accessibilityDiv
+            {
+                position: fixed;
+                z-index: 1000;
+                display: flex;
+                left: -185px;
+                top: 60%;
+                transition: left 0.7s;
+            }
+
+            #accessibilityMenu
+            {
+                padding: 10px 20px 10px 20px;
+                background: white;
+                outline: 1px solid rgba(0,0,0,0.2);
+                z-index: 1001;
+                font-size: 17px;
+                width: 185px;
+            }
+
+            #accessibilityMenu ul
+            {
+                    list-style: none;
+                    padding-left: 0;
+                    margin: 0;
+                    margin-top: 6px;
+                    z-index: 1005;
+            }
+
+            .accessibilityMenuLi
+            {
+                list-style-type: none;
+                cursor: pointer;
+                margin-top: 10px;
+                user-select: none;
+            }
+
+            .accessibilityMenuLiIcons
+            {
+                font-family: 'Material Icons';
+                list-style-type: none;
+            }
+
+            #accessibilityToggleMenuBtn
+            {
+                font-family: 'Material Icons';
+                width: 40px;
+                height: 40px;
+                font-size: 20px;
+                background: rgba(50,70,130);
+                box-shadow: 0px 1px 7px rgba(0,0,0,0.6);
+                color: white;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 0 50% 50% 0;
+                cursor: pointer;
+                user-select: none;
+            }
+        </style>
     `).appendTo('head')
 }
 
-function generateBarButtons()
+function initializeMenu()
 {
-    return `
-            <a href="#" class="material-icons" 
-                id="accessibilityHighContrastBtn">brightness_medium</a>
-            <a href="#" class="material-icons" 
-                id="accessibilityDecreaseFontBtn">zoom_out</a>
-            <a href="#" class="material-icons" 
-                id="accessibilityResetFontBtn">youtube_searched_for</a>
-            <a href="#" class="material-icons" 
-                id="accessibilityIncreaseFontBtn">zoom_in</a>
-            `
-}
-
-function addDashboardBar()
-{
-    $('.popover-region-notifications').parent().before(
-        `<li id="accessibilityBar" class="
-            navItem highContrastBlackBackground highContrastWhiteText">
-            ${generateBarButtons()}
-        </li>`)
-}
-
-function addLoginBar()
-{
-    $('#region-main').before(
-        `<nav id="accessibilityBar">
-            <a>Precisando de ajuda?</a>
-            ${generateBarButtons()}
-        </nav>`)
-    $('#accessibilityBar').css({
-        "justify-content" : "flex-end",
-        "padding-top" : "2vh"})
-}
-
-function initializeBar()
-{
-    addBarStyle()
-    if(window.location.pathname.includes('/login/'))
-        addLoginBar()
-    else
-        addDashboardBar()
+    initializeMenuTag()
+    initializeMenuStyle()
 }
 
 function initializeZoom()
 {
-    zoomFonts(0, false)
+    if(Cookies.get('fontZoom') == undefined)
+        setFontZoomCookie(1)
+    else
+        zoomFonts(0)
 }
 
-function initializeHighContrast()
+function initializeHighContrastCookie()
+{
+    if(isHighContrastCookie() == undefined)
+        Cookies.set('isHighContrast', false, {expires: 365})
+    else
+        if(isHighContrastCookie())
+            applyHighContrast()
+}
+
+function initializeGrayscale()
+{
+    if(isGrayscaleCookie == undefined)
+        Cookies.set('isGrayscale', false, {expires: 365})
+    else
+        applyGrayscale(parseBoolToInt(isGrayscaleCookie()))
+}
+
+function initializeHighContrastStyle()
 {
     //regular text
-    $('body').find('*').not('script, style').addClass('highContrastBlackBackground')
-    $('body').find('*').not('script, style, a').addClass('highContrastWhiteText')
+    $('body, #accessibilityDiv').find('*').not(
+        'script, style, head').addClass('highContrastBlackBackground')
+    $('html, #accessibilityDiv').find('*').not(
+        'script, style, a').addClass('highContrastWhiteText')
     //links
-    $('body').find('a').addClass('highContrastYellowText')
+    $('html').find('a').addClass('highContrastYellowText')
     //inputs
     $('input').addClass('highContrastPlaceholder')
     //borders
     $(`section, nav, button, input, .card-body, .drag, .drop, .alert
-        , .card-header, footer, dropdown-menu`).addClass('highContrastBorder')
+        , .card-header, footer, dropdown-menu, #accessibilityDiv div,
+        .body-container, .header-container, .p-2
+        `).addClass('highContrastBorder')
     $('.active').find('span').addClass('highContrastBorder')
 
     //vlibras
@@ -204,25 +297,33 @@ function initializeHighContrast()
     $('.vw-text:after').attr('style', 'color: white !important')
 }
 
+function initializeHighContrast()
+{
+    initializeHighContrastCookie()
+    initializeHighContrastStyle()
+}
+
 function initialize()
 {
-    initializeBar()
+    initializeMenu()
     initializeHighContrast()
+    initializeGrayscale()
     initializeZoom()
+}
 
-    if(Cookies.get('fontZoom') == undefined)
-        Cookies.set('fontZoom', 0, {expires: 365})
+function toggleMenu()
+{
+    if(parseInt($('#accessibilityDiv').css('left')) < 0)
+        $('#accessibilityDiv').css('left', 0)
     else
-        zoomFonts(getFontZoomCookie(), false)
-    if(isHighContrastCookie() == undefined)
-        Cookies.set('isHighContrast', 0, {expires: 365})
-    else
-        if(isHighContrastCookie())
-            applyHighContrast()
+    {
+        let size = parseInt($('#accessibilityMenu').css('width'))
+        $('#accessibilityDiv').css('left', -size)
+    }
 }
 
 $(document).ready(function() {
-    const zoomStep = 1
+    const zoomStep = 0.05
 
     initialize()
 
@@ -231,14 +332,22 @@ $(document).ready(function() {
     })
 
     $('#accessibilityIncreaseFontBtn').click(function () {
-        zoomFonts(zoomStep, true)
+        zoomFonts(zoomStep)
     })
 
     $('#accessibilityDecreaseFontBtn').click(function () {
-        zoomFonts(-zoomStep, true)
+        zoomFonts(-zoomStep)
     })
 
     $('#accessibilityResetFontBtn').click(function () {
         resetFonts()
+    })
+
+    $('#accessibilityToggleMenuBtn').click(function(){
+        toggleMenu()
+    })
+
+    $('#accessibilityGrayscaleBtn').click(function(){
+        toggleGrayscale()
     })
 })
