@@ -12,7 +12,7 @@ No Moodle:
 5. Na caixa de texto ao lado de "Dentro da tag HEAD", insira o conteúdo abaixo da subseção "BARRA" na "SEÇÃO COPIA E COLA" até a marcação indicando parada;
 6. Se desejar instalar o Vlibras, siga os passos abaixo. Caso contrário, vá para o último passo;
 7. Na caixa de texto ao lado de "Antes da tag BODY ser fechada", insira o conteúdo abaixo da subseção "VLIBRAS" na "SEÇÃO COPIA E COLA" até a marcação indicando parada;
-8. Clique em salvar mudanças;
+8. Clique em salvar mudanças.
 
 SEÇÃO COPIA E COLA
 <!-- BARRA -->
