@@ -8,18 +8,17 @@ Uma ferramenta que contém as funções de alto contraste, filtro em escala de c
 
 ![Imagem da barra de acessibilidade](./screenshoots/bar.jpg)
 ![Captura de tela da barra no Moodle](./screenshoots/regular.jpg)
-**Barra de acessibilidade**
+### **Barra de acessibilidade**
 ![Captura de tela do filtro preto e branco](./screenshoots/grayscale.jpg)
-**Filtro preto e branco**
+### **Filtro preto e branco**
 ![Captura de tela do filtro alto contraste](./screenshoots/hc.jpg)
-**Filtro alto contraste**
+### **Filtro alto contraste**
 ![Captura de tela da ampliação negativa com alto contraste](./screenshoots/hczoomm.jpg)
-**Ampliação negativa com alto contraste**
+### **Ampliação negativa com alto contraste**
 ![Captura de tela da ampliação positiva com alto constraste](./screenshoots/hczoomM.jpg)
-**Ampliação positiva com alto contraste**
+### **Ampliação positiva com alto contraste**
 
-* Arquivo pronto para instalação dos recursos e da serviço VLibras
-
-
+## Como instalar os recursos?
+Siga as instruções do arquivo de instalação com nome `INSTALAÇÃO.txt`. Nele também está contido os passos para adicionar o VLibras no seu _Moodle_.
 
 **Nota: Desenvolvido para o idioma português do Brasil.**

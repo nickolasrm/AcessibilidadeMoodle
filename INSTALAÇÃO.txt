@@ -1,0 +1,52 @@
+COMO INSTALAR
+Pré-instalação:
+1. Abre o arquivo "accessibilityPanel.js" contido na pasta "pluginjs" num editor de textos
+2. Copie o conteudo do arquivo
+3. Cole na subseção "BARRA" da "SEÇÃO COPIA E COLA" na linha em branco indicada lá
+
+No Moodle:
+1. Vá no endereço do Moodle que quer instalar a ferramenta.
+2. Entre na página "Administação do site"
+3. Clique na aba "Aparência"
+4. Clique na opção "Código HTML adicional"
+5. Na caixa de texto ao lado de "Dentro da tag HEAD" insira o conteudo abaixo da subseção "BARRA" na "SEÇÃO COPIA E COLA" até a marcação indicando parada
+6. Se desejar instalar o Vlibras siga os passos abaixo, caso contrário, vá para o ultimo passo
+7. Na caixa de texto ao lado de "Antes da tag BODY ser fechada" insira o conteudo abaixo da subseção "VLIBRAS" na "SEÇÃO COPIA E COLA" até a marcação indicando parada
+8. Clique em salvar mudanças
+
+SEÇÃO COPIA E COLA
+<!-- BARRA -->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+            rel="stylesheet">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js">
+        </script>
+        <script type="text/javascript">
+
+
+
+
+
+            <!--CONTEUDO DE accessibilityPanel.js NA LINHA EM BRANCO ACIMA-->
+
+
+
+
+        </script>
+
+<!-- COPIE ATÉ AQUI-->
+
+<!-- VLIBRAS -->
+
+        <vlibraswidget><vlibraswidget><vlibraswidget><vlibraswidget><vlibraswidget>  <div vw class="enabled">
+            <div vw-access-button class="active"></div>
+            <div vw-plugin-wrapper>
+            <div class="vw-plugin-top-wrapper"></div>
+            </div>
+        </div>
+        <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+        <script>
+            new window.VLibras.Widget('https://vlibras.gov.br/app');
+        </script></vlibraswidget></vlibraswidget></vlibraswidget></vlibraswidget></vlibraswidget>
+
+<!-- COPIE ATÉ AQUI-->
