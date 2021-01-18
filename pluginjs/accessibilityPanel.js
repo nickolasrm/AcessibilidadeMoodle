@@ -1,3 +1,4 @@
+//Cookies section
 function addToFontZoomCookie(value)
 {
     Cookies.set('fontZoom', parseFloat(Cookies.get('fontZoom')) + value)
@@ -21,6 +22,7 @@ function isGrayscaleCookie() { return parseBool(Cookies.get('isGrayscale'))}
 
 
 
+//Zoom section
 function resetFonts()
 {
     setFontZoomCookie(1)
@@ -46,7 +48,7 @@ function zoomFonts(addToFactor)
 
 
 
-
+//HC section
 function applyHighContrast()
 {
     setHighContrastCookie(true)
@@ -128,7 +130,7 @@ function toggleHighContrast()
 
 
 
-
+//Grayscale section
 function applyGrayscale(factor)
 {
     $('html').css('filter', `grayscale(${factor})`)
@@ -141,7 +143,7 @@ function toggleGrayscale()
 }
 
 
-
+//Initialize section
 function initializeMenuTag()
 {
     $(`
@@ -311,6 +313,7 @@ function initialize()
     initializeZoom()
 }
 
+//Menu
 function toggleMenu()
 {
     if(parseInt($('#accessibilityDiv').css('left')) < 0)
@@ -322,6 +325,7 @@ function toggleMenu()
     }
 }
 
+//Auto implementing
 $(document).ready(function() {
     const zoomStep = 0.05
 
