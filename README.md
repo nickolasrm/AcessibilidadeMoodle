@@ -6,7 +6,12 @@ Este repositório contém implementações de soluções para pessoas com defici
 
 Uma ferramenta que contém as funções de alto contraste, filtro em escala de cinza e ampliação para pessoas com deficiências visuais.
 
-![Imagem da barra de acessibilidade](./screenshoots/bar.jpg) Barra de acessibilidade
+![Imagem da barra de acessibilidade](./screenshoots/bar.jpg)
+![Captura de tela da barra no Moodle](./screenshoots/regular.jpg)
+![Captura de tela do filtro preto e branco](./screenshoots/grayscale.jpg)
+![Captura de tela do filtro alto contraste](./screenshoots/hc.jpg)
+![Captura de tela da ampliação negativa com alto contraste](./screenshoots/hczoomm.jpg)
+![Captura de tela da ampliação positiva com alto constraste](./screenshoots/hczoomM.jpg)
 
 * Arquivo pronto para instalação dos recursos e da serviço VLibras
 
