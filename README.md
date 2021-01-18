@@ -19,6 +19,6 @@ Uma ferramenta que contém as funções de alto contraste, filtro em escala de c
 #### **Ampliação positiva com alto contraste**
 
 ## Como instalar os recursos?
-Siga as instruções do arquivo de instalação com nome `INSTALAÇÃO.txt`. Nele também está contido os passos para adicionar o VLibras no seu _Moodle_.
+Siga as instruções do arquivo de instalação com nome `INSTALAÇÃO.txt`. Nele também estão contidos os passos para adicionar o VLibras no seu _Moodle_.
 
 **Nota: Desenvolvido para o idioma português do Brasil.**
