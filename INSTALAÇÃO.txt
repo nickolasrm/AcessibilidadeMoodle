@@ -1,18 +1,18 @@
 COMO INSTALAR
 Pré-instalação:
-1. Abre o arquivo "accessibilityPanel.js" contido na pasta "pluginjs" num editor de textos
-2. Copie o conteudo do arquivo
-3. Cole na subseção "BARRA" da "SEÇÃO COPIA E COLA" na linha em branco indicada lá
+1. Abra o arquivo "accessibilityPanel.js" contido na pasta "pluginjs" num editor de textos;
+2. Copie o conteúdo do arquivo;
+3. Cole na subseção "BARRA" da "SEÇÃO COPIA E COLA" na linha em branco indicada lá.
 
 No Moodle:
-1. Vá no endereço do Moodle que quer instalar a ferramenta.
-2. Entre na página "Administação do site"
-3. Clique na aba "Aparência"
-4. Clique na opção "Código HTML adicional"
-5. Na caixa de texto ao lado de "Dentro da tag HEAD" insira o conteudo abaixo da subseção "BARRA" na "SEÇÃO COPIA E COLA" até a marcação indicando parada
-6. Se desejar instalar o Vlibras siga os passos abaixo, caso contrário, vá para o ultimo passo
-7. Na caixa de texto ao lado de "Antes da tag BODY ser fechada" insira o conteudo abaixo da subseção "VLIBRAS" na "SEÇÃO COPIA E COLA" até a marcação indicando parada
-8. Clique em salvar mudanças
+1. Vá ao endereço do Moodle que quer instalar a ferramenta;
+2. Entre na página "Administação do site";
+3. Clique na aba "Aparência";
+4. Clique na opção "Código HTML adicional";
+5. Na caixa de texto ao lado de "Dentro da tag HEAD", insira o conteúdo abaixo da subseção "BARRA" na "SEÇÃO COPIA E COLA" até a marcação indicando parada;
+6. Se desejar instalar o Vlibras, siga os passos abaixo. Caso contrário, vá para o último passo;
+7. Na caixa de texto ao lado de "Antes da tag BODY ser fechada", insira o conteúdo abaixo da subseção "VLIBRAS" na "SEÇÃO COPIA E COLA" até a marcação indicando parada;
+8. Clique em salvar mudanças;
 
 SEÇÃO COPIA E COLA
 <!-- BARRA -->
